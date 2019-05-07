@@ -1,0 +1,41 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+        },
+        "profileName": {
+            "required": true,
+            "type": "string"
+        },
+        "endpointName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Input of the custom domain to be validated for DNS mapping.",
+            "properties": {
+                "hostName": {
+                    "description": "The host name of the custom domain. Must be a domain name.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "hostName"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

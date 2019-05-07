@@ -1,0 +1,38 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+        },
+        "profileName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Properties required to update a profile.",
+            "properties": {
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Profile tags",
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "x-ms-azure-resource": true
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

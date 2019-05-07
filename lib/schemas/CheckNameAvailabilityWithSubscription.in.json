@@ -1,0 +1,38 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Input of CheckNameAvailability API.",
+            "properties": {
+                "name": {
+                    "description": "The resource name to validate.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "The type of the resource whose name is to be validated.",
+                    "enum": [
+                        "Microsoft.Cdn/Profiles/Endpoints"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": false,
+                        "name": "ResourceType"
+                    }
+                }
+            },
+            "required": [
+                "name",
+                "type"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

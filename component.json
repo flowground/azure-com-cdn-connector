@@ -1,0 +1,645 @@
+{
+    "title": "CdnManagementClient",
+    "description": "Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure.",
+    "docsUrl": "",
+    "url": "https://api.apis.guru/v2/specs/azure.com/cdn/2017-10-12/swagger.json",
+    "envVars": {
+        "OAUTH_CLIENT_ID": {
+            "description": "OAuth Client ID"
+        },
+        "OAUTH_CLIENT_SECRET": {
+            "description": "OAuth Client Secret"
+        }
+    },
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://management.azure.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            },
+            "azure_auth": {
+                "label": "Azure Active Directory OAuth2 Flow.",
+                "viewClass": "OAuthFieldView"
+            }
+        },
+        "oauth2": {
+            "client_id": "{{OAUTH_CLIENT_ID}}",
+            "client_secret": "{{OAUTH_CLIENT_SECRET}}",
+            "auth_uri": "https://login.microsoftonline.com/common/oauth2/authorize"
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "CheckNameAvailability": {
+            "main": "./lib/actions/CheckNameAvailability.js",
+            "title": "Check the availability of a resource name. This is needed for resources where name is globally unique, such as a CDN endpoint.",
+            "description": "Check the availability of a resource name. This is needed for resources where name is globally unique, such as a CDN endpoint.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CheckNameAvailability.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "EdgeNodes_List": {
+            "main": "./lib/actions/EdgeNodes_List.js",
+            "title": "Edgenodes are the global Point of Presence (POP) locations used to deliver CDN content to end users.",
+            "description": "Edgenodes are the global Point of Presence (POP) locations used to deliver CDN content to end users.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/EdgeNodes_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Operations_List": {
+            "main": "./lib/actions/Operations_List.js",
+            "title": "Lists all of the available CDN REST API operations.",
+            "description": "Lists all of the available CDN REST API operations.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Operations_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CheckNameAvailabilityWithSubscription": {
+            "main": "./lib/actions/CheckNameAvailabilityWithSubscription.js",
+            "title": "Check the availability of a resource name. This is needed for resources where name is globally unique, such as a CDN endpoint.",
+            "description": "Check the availability of a resource name. This is needed for resources where name is globally unique, such as a CDN endpoint.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CheckNameAvailabilityWithSubscription.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ResourceUsage_List": {
+            "main": "./lib/actions/ResourceUsage_List.js",
+            "title": "Check the quota and actual usage of the CDN profiles under the given subscription.",
+            "description": "Check the quota and actual usage of the CDN profiles under the given subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ResourceUsage_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Profiles_List": {
+            "main": "./lib/actions/Profiles_List.js",
+            "title": "Lists all of the CDN profiles within an Azure subscription.",
+            "description": "Lists all of the CDN profiles within an Azure subscription.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Profiles_List.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "ValidateProbe": {
+            "main": "./lib/actions/ValidateProbe.js",
+            "title": "Check if the probe path is a valid path and the file can be accessed. Probe path is the path to a file hosted on the origin server to help accelerate the delivery of dynamic content via the CDN endpoint. This path is relative to the origin path specified in the endpoint configuration.",
+            "description": "Check if the probe path is a valid path and the file can be accessed. Probe path is the path to a file hosted on the origin server to help accelerate the delivery of dynamic content via the CDN endpoint. This path is relative to the origin path specified in the endpoint configuration.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/ValidateProbe.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Profiles_ListByResourceGroup": {
+            "main": "./lib/actions/Profiles_ListByResourceGroup.js",
+            "title": "Lists all of the CDN profiles within a resource group.",
+            "description": "Lists all of the CDN profiles within a resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Profiles_ListByResourceGroup.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Profiles_Delete": {
+            "main": "./lib/actions/Profiles_Delete.js",
+            "title": "Deletes an existing CDN profile with the specified parameters. Deleting a profile will result in the deletion of all of the sub-resources including endpoints, origins and custom domains.",
+            "description": "Deletes an existing CDN profile with the specified parameters. Deleting a profile will result in the deletion of all of the sub-resources including endpoints, origins and custom domains.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Profiles_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Profiles_Get": {
+            "main": "./lib/actions/Profiles_Get.js",
+            "title": "Gets a CDN profile with the specified profile name under the specified subscription and resource group.",
+            "description": "Gets a CDN profile with the specified profile name under the specified subscription and resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Profiles_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Profiles_Update": {
+            "main": "./lib/actions/Profiles_Update.js",
+            "title": "Updates an existing CDN profile with the specified profile name under the specified subscription and resource group.",
+            "description": "Updates an existing CDN profile with the specified profile name under the specified subscription and resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Profiles_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Profiles_Create": {
+            "main": "./lib/actions/Profiles_Create.js",
+            "title": "Creates a new CDN profile with a profile name under the specified subscription and resource group.",
+            "description": "Creates a new CDN profile with a profile name under the specified subscription and resource group.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Profiles_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Profiles_ListResourceUsage": {
+            "main": "./lib/actions/Profiles_ListResourceUsage.js",
+            "title": "Checks the quota and actual usage of endpoints under the given CDN profile.",
+            "description": "Checks the quota and actual usage of endpoints under the given CDN profile.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Profiles_ListResourceUsage.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Endpoints_ListByProfile": {
+            "main": "./lib/actions/Endpoints_ListByProfile.js",
+            "title": "Lists existing CDN endpoints.",
+            "description": "Lists existing CDN endpoints.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Endpoints_ListByProfile.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Endpoints_Delete": {
+            "main": "./lib/actions/Endpoints_Delete.js",
+            "title": "Deletes an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+            "description": "Deletes an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Endpoints_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Endpoints_Get": {
+            "main": "./lib/actions/Endpoints_Get.js",
+            "title": "Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+            "description": "Gets an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Endpoints_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Endpoints_Update": {
+            "main": "./lib/actions/Endpoints_Update.js",
+            "title": "Updates an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags and Origin HostHeader can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update custom domains, use the Update Custom Domain operation.",
+            "description": "Updates an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags and Origin HostHeader can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update custom domains, use the Update Custom Domain operation.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Endpoints_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Endpoints_Create": {
+            "main": "./lib/actions/Endpoints_Create.js",
+            "title": "Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+            "description": "Creates a new CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Endpoints_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Endpoints_ListResourceUsage": {
+            "main": "./lib/actions/Endpoints_ListResourceUsage.js",
+            "title": "Checks the quota and usage of geo filters and custom domains under the given endpoint.",
+            "description": "Checks the quota and usage of geo filters and custom domains under the given endpoint.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Endpoints_ListResourceUsage.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CustomDomains_ListByEndpoint": {
+            "main": "./lib/actions/CustomDomains_ListByEndpoint.js",
+            "title": "Lists all of the existing custom domains within an endpoint.",
+            "description": "Lists all of the existing custom domains within an endpoint.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CustomDomains_ListByEndpoint.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CustomDomains_Delete": {
+            "main": "./lib/actions/CustomDomains_Delete.js",
+            "title": "Deletes an existing custom domain within an endpoint.",
+            "description": "Deletes an existing custom domain within an endpoint.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CustomDomains_Delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CustomDomains_Get": {
+            "main": "./lib/actions/CustomDomains_Get.js",
+            "title": "Gets an existing custom domain within an endpoint.",
+            "description": "Gets an existing custom domain within an endpoint.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CustomDomains_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CustomDomains_Create": {
+            "main": "./lib/actions/CustomDomains_Create.js",
+            "title": "Creates a new custom domain within an endpoint.",
+            "description": "Creates a new custom domain within an endpoint.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CustomDomains_Create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CustomDomains_DisableCustomHttps": {
+            "main": "./lib/actions/CustomDomains_DisableCustomHttps.js",
+            "title": "Disable https delivery of the custom domain.",
+            "description": "Disable https delivery of the custom domain.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CustomDomains_DisableCustomHttps.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "CustomDomains_EnableCustomHttps": {
+            "main": "./lib/actions/CustomDomains_EnableCustomHttps.js",
+            "title": "Enable https delivery of the custom domain.",
+            "description": "Enable https delivery of the custom domain.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/CustomDomains_EnableCustomHttps.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Endpoints_LoadContent": {
+            "main": "./lib/actions/Endpoints_LoadContent.js",
+            "title": "Pre-loads a content to CDN. Available for Verizon Profiles.",
+            "description": "Pre-loads a content to CDN. Available for Verizon Profiles.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Endpoints_LoadContent.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Origins_ListByEndpoint": {
+            "main": "./lib/actions/Origins_ListByEndpoint.js",
+            "title": "Lists all of the existing origins within an endpoint.",
+            "description": "Lists all of the existing origins within an endpoint.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Origins_ListByEndpoint.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Origins_Get": {
+            "main": "./lib/actions/Origins_Get.js",
+            "title": "Gets an existing origin within an endpoint.",
+            "description": "Gets an existing origin within an endpoint.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Origins_Get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Origins_Update": {
+            "main": "./lib/actions/Origins_Update.js",
+            "title": "Updates an existing origin within an endpoint.",
+            "description": "Updates an existing origin within an endpoint.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Origins_Update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Endpoints_PurgeContent": {
+            "main": "./lib/actions/Endpoints_PurgeContent.js",
+            "title": "Removes a content from CDN.",
+            "description": "Removes a content from CDN.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Endpoints_PurgeContent.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Endpoints_Start": {
+            "main": "./lib/actions/Endpoints_Start.js",
+            "title": "Starts an existing CDN endpoint that is on a stopped state.",
+            "description": "Starts an existing CDN endpoint that is on a stopped state.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Endpoints_Start.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Endpoints_Stop": {
+            "main": "./lib/actions/Endpoints_Stop.js",
+            "title": "Stops an existing running CDN endpoint.",
+            "description": "Stops an existing running CDN endpoint.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Endpoints_Stop.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Endpoints_ValidateCustomDomain": {
+            "main": "./lib/actions/Endpoints_ValidateCustomDomain.js",
+            "title": "Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.",
+            "description": "Validates the custom domain mapping to ensure it maps to the correct CDN endpoint in DNS.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Endpoints_ValidateCustomDomain.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Profiles_GenerateSsoUri": {
+            "main": "./lib/actions/Profiles_GenerateSsoUri.js",
+            "title": "Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemental portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.",
+            "description": "Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemental portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Profiles_GenerateSsoUri.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "Profiles_ListSupportedOptimizationTypes": {
+            "main": "./lib/actions/Profiles_ListSupportedOptimizationTypes.js",
+            "title": "Gets the supported optimization types for the current profile. A user can create an endpoint with an optimization type from the listed values.",
+            "description": "Gets the supported optimization types for the current profile. A user can create an endpoint with an optimization type from the listed values.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/Profiles_ListSupportedOptimizationTypes.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}

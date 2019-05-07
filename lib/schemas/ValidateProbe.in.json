@@ -1,0 +1,26 @@
+{
+    "type": "object",
+    "properties": {
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Input of the validate probe API.",
+            "properties": {
+                "probeURL": {
+                    "description": "The probe URL to validate.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "probeURL"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

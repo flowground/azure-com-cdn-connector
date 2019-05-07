@@ -1,0 +1,69 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+        },
+        "profileName": {
+            "required": true,
+            "type": "string"
+        },
+        "endpointName": {
+            "required": true,
+            "type": "string"
+        },
+        "customDomainName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "The JSON object that contains the properties to secure a custom domain.",
+            "discriminator": {
+                "propertyName": "certificateSource"
+            },
+            "properties": {
+                "certificateSource": {
+                    "description": "Defines the source of the SSL certificate.",
+                    "enum": [
+                        "AzureKeyVault",
+                        "Cdn"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": true,
+                        "name": "CertificateSource"
+                    }
+                },
+                "protocolType": {
+                    "description": "Defines the TLS extension protocol that is used for secure delivery.",
+                    "enum": [
+                        "ServerNameIndication",
+                        "IPBased"
+                    ],
+                    "type": "string",
+                    "x-ms-enum": {
+                        "modelAsString": true,
+                        "name": "ProtocolType"
+                    }
+                }
+            },
+            "required": [
+                "certificateSource",
+                "protocolType"
+            ],
+            "type": "object"
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}

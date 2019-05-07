@@ -1,0 +1,224 @@
+{
+    "type": "object",
+    "properties": {
+        "resourceGroupName": {
+            "required": true,
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+        },
+        "profileName": {
+            "required": true,
+            "type": "string"
+        },
+        "endpointName": {
+            "required": true,
+            "type": "string"
+        },
+        "subscriptionId": {
+            "required": true,
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "Properties required to create or update an endpoint.",
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "The JSON object containing endpoint update parameters.",
+                    "properties": {
+                        "contentTypesToCompress": {
+                            "description": "List of content types on which compression applies. The value should be a valid MIME type.",
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array"
+                        },
+                        "deliveryPolicy": {
+                            "description": "A policy that specifies the delivery rules to be used for an endpoint.",
+                            "properties": {
+                                "description": {
+                                    "description": "User-friendly description of the policy.",
+                                    "type": "string"
+                                },
+                                "rules": {
+                                    "description": "A list of the delivery rules.",
+                                    "items": {
+                                        "description": "A rule that specifies a set of actions and conditions",
+                                        "properties": {
+                                            "actions": {
+                                                "description": "A list of actions that are executed when all the conditions of a rule are satisfied.",
+                                                "items": {
+                                                    "description": "An action for the delivery rule.",
+                                                    "discriminator": {
+                                                        "propertyName": "name"
+                                                    },
+                                                    "properties": {
+                                                        "name": {
+                                                            "description": "The name of the action for the delivery rule.",
+                                                            "enum": [
+                                                                "CacheExpiration"
+                                                            ],
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "name"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "conditions": {
+                                                "description": "A list of conditions that must be matched for the actions to be executed",
+                                                "items": {
+                                                    "description": "A condition for the delivery rule.",
+                                                    "discriminator": {
+                                                        "propertyName": "name"
+                                                    },
+                                                    "properties": {
+                                                        "name": {
+                                                            "description": "The name of the condition for the delivery rule.",
+                                                            "enum": [
+                                                                "UrlPath",
+                                                                "UrlFileExtension"
+                                                            ],
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "name"
+                                                    ],
+                                                    "type": "object"
+                                                },
+                                                "type": "array"
+                                            },
+                                            "order": {
+                                                "description": "The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied.",
+                                                "type": "integer"
+                                            }
+                                        },
+                                        "required": [
+                                            "order",
+                                            "actions"
+                                        ],
+                                        "type": "object"
+                                    },
+                                    "type": "array"
+                                }
+                            },
+                            "required": [
+                                "rules"
+                            ],
+                            "type": "object"
+                        },
+                        "geoFilters": {
+                            "description": "List of rules defining the user's geo access within a CDN endpoint. Each geo filter defines an access rule to a specified path or content, e.g. block APAC for path /pictures/",
+                            "items": {
+                                "description": "Rules defining user's geo access within a CDN endpoint.",
+                                "properties": {
+                                    "action": {
+                                        "description": "Action of the geo filter, i.e. allow or block access.",
+                                        "enum": [
+                                            "Block",
+                                            "Allow"
+                                        ],
+                                        "type": "string",
+                                        "x-ms-enum": {
+                                            "modelAsString": false,
+                                            "name": "GeoFilterActions"
+                                        }
+                                    },
+                                    "countryCodes": {
+                                        "description": "Two letter country codes defining user country access in a geo filter, e.g. AU, MX, US.",
+                                        "items": {
+                                            "type": "string"
+                                        },
+                                        "type": "array"
+                                    },
+                                    "relativePath": {
+                                        "description": "Relative path applicable to geo filter. (e.g. '/mypictures', '/mypicture/kitty.jpg', and etc.)",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "relativePath",
+                                    "action",
+                                    "countryCodes"
+                                ],
+                                "type": "object"
+                            },
+                            "type": "array"
+                        },
+                        "isCompressionEnabled": {
+                            "description": "Indicates whether content compression is enabled on CDN. Default value is false. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on CDN when requested content is smaller than 1 byte or larger than 1 MB.",
+                            "type": "boolean"
+                        },
+                        "isHttpAllowed": {
+                            "description": "Indicates whether HTTP traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed.",
+                            "type": "boolean"
+                        },
+                        "isHttpsAllowed": {
+                            "description": "Indicates whether HTTPS traffic is allowed on the endpoint. Default value is true. At least one protocol (HTTP or HTTPS) must be allowed.",
+                            "type": "boolean"
+                        },
+                        "optimizationType": {
+                            "description": "Specifies what scenario the customer wants this CDN endpoint to optimize for, e.g. Download, Media services. With this information, CDN can apply scenario driven optimization.",
+                            "enum": [
+                                "GeneralWebDelivery",
+                                "GeneralMediaStreaming",
+                                "VideoOnDemandMediaStreaming",
+                                "LargeFileDownload",
+                                "DynamicSiteAcceleration"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": true,
+                                "name": "OptimizationType"
+                            }
+                        },
+                        "originHostHeader": {
+                            "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.",
+                            "type": "string"
+                        },
+                        "originPath": {
+                            "description": "A directory path on the origin that CDN can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.",
+                            "type": "string"
+                        },
+                        "probePath": {
+                            "description": "Path to a file hosted on the origin which helps accelerate delivery of the dynamic content and calculate the most optimal routes for the CDN. This is relative to the origin path.",
+                            "type": "string"
+                        },
+                        "queryStringCachingBehavior": {
+                            "description": "Defines how CDN caches requests that include query strings. You can ignore any query strings when caching, bypass caching to prevent requests that contain query strings from being cached, or cache every request with a unique URL.",
+                            "enum": [
+                                "IgnoreQueryString",
+                                "BypassCaching",
+                                "UseQueryString",
+                                "NotSet"
+                            ],
+                            "type": "string",
+                            "x-ms-enum": {
+                                "modelAsString": false,
+                                "name": "QueryStringCachingBehavior"
+                            }
+                        }
+                    }
+                },
+                "tags": {
+                    "additionalProperties": {
+                        "type": "string"
+                    },
+                    "description": "Endpoint tags.",
+                    "type": "object"
+                }
+            },
+            "type": "object",
+            "x-ms-azure-resource": true
+        },
+        "api_version": {
+            "required": true,
+            "type": "string"
+        }
+    }
+}
